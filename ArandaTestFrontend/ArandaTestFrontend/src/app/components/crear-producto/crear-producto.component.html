@@ -1,0 +1,66 @@
+<div class="cardPrincipal card">
+  <h2 class="text-center">{{pageTitle}}</h2>
+  <br>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="row">
+        <div class="col-sm-3">
+          <div *ngIf="imagePath">
+            <br />
+            <img [src]="imagePath" width="200px">
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <form #productoForm="ngForm" (ngSubmit)="guardarProducto(productoForm)">
+            <input type="text" class="form-control" id="Id" name="Id" [(ngModel)]="producto.Id" hidden #Id="ngModel" />
+            <div class="form-group row">
+              <label for="Nombre" class="col-sm-2 col-form-label">Nombre</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="Nombre" name="Nombre" [(ngModel)]="producto.Nombre" required #Nombre="ngModel" />
+              </div>
+            </div>
+            <div *ngIf="Nombre.invalid && Nombre.dirty" class="text-danger">
+              El nombre es requerido.
+            </div>
+            <br/>
+            <div class="form-group row">
+              <label for="Descripcion" class="col-sm-2 col-form-label">Descripción</label>
+              <div class="col-sm-10">
+                <input class="form-control" id="Descripcion" name="Descripcion" [(ngModel)]="producto.Descripcion" required #Descripcion="ngModel" />
+              </div>
+            </div>
+            <div *ngIf="Descripcion.invalid && Descripcion.dirty" class="text-danger">
+              La descripción es requerida.
+            </div>
+            <br/>
+            <div class="form-group row">
+              <label for="Categoria" class="col-sm-2 col-form-label">Categoria</label>
+              <div class="col-sm-10">
+                <input class="form-control" id="Categoria" name="Categoria" [(ngModel)]="producto.Categoria" required #Categoria="ngModel" />
+              </div>
+            </div>
+            <div *ngIf="Categoria.invalid && Categoria.dirty" class="text-danger">
+              La categoria es requerida.
+            </div>
+            <br/>
+            <div class="input-group mb-3">
+              <label class="input-group-text" for="inputGroupFile02">Imagen</label>
+              <input type="file" class="form-control" accept="image/*" (change)="onSelectedFile($event)" id="Imagen" name="Imagen" [(ngModel)]="producto.Imagen" [required]="requiredImage" #Imagen="ngModel">
+            </div>
+            <div *ngIf="Imagen.invalid && Imagen.dirty" class="text-danger">
+              Es necesario seleccionar una imagen.
+            </div>
+            <br/>
+            <button type="submit" [disabled]="!productoForm.valid" class="btn btn-primary">Guardar</button>
+            &nbsp;&nbsp;
+            <button [routerLink]="['/']" class="btn btn-success">Volver</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+    <div *ngIf="submitted">
+      <h4>You submitted successfully!</h4>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="cardPrincipal card">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="text-center">Listado de Productos</h3>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm-1" style="padding-top: 5px;">
+      <h5>Filtrar :</h5>
+    </div>
+    <div class="col-sm-3">
+      <select class="form-select" aria-label="Default select example" [(ngModel)]="fieldFilter">
+        <option selected>Seleccione una opción</option>
+        <option value="Nombre">Nombre</option>
+        <option value="Descripción">Descripción</option>
+        <option value="Categoria">Categoria</option>
+      </select>
+    </div>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" id="Busqueda" name="Busqueda" placeholder="Contiene" [(ngModel)]="criterioFilter" />
+    </div>
+    <div class="col-sm-3">
+      <button class="btn btn-secondary" (click)="filtrar()">Filtrar</button>
+    </div>
+    <div class="col-sm-2">
+      <button [routerLink]="['/create']" class="btn btn-success">Agregar Producto</button>
+    </div>
+  </div>
+  <br>
+  <table class="table table-striped table-hover">
+    <thead>
+        <th (click)="ordenar('Nombre')" style="width: 20%;" class="h4">
+          Nombre <img *ngIf="orderNombre" [ngClass]="{'flechaAbajo': !orderAsc}" [src]="'./../../../assets/arrowup_106436.jpg'" width="30px" height="35px" />
+        <th style="width: 25%;" class="h4">Descripción</th>
+        <th (click)="ordenar('Categoria')" style="width: 20%;" class="h4">Categoria <img *ngIf="orderCategoria" [ngClass]="{'flechaAbajo': !orderAsc}" [src]="'./../../../assets/arrowup_106436.jpg'" width="30px" height="35px" /></th>
+        <th style="width: 15%;" class="h4">Imagen</th>
+        <th style="width: 20%;" class="h4">Opciones</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prod of productos">
+          <td>{{prod.nombre}}</td>
+          <td>{{prod.descripcion}}</td>
+          <td>{{prod.categoria}}</td>
+          <td><img [src]="prod.imagenBase64" width="80px"></td>
+          <td class="action">
+            <a [routerLink]="['/edit', prod.id]" class="btn btn-info btn-sm">Actualizar</a>
+            &nbsp;&nbsp;
+            <a (click)="onDelete(prod.id)" class="btn btn-danger btn-sm">Eliminar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <a class="page-link" (click)="previusPage()">Previous</a>
+      </li>
+      <li *ngFor="let pag of paginas" [ngClass]="{'page-item': true, 'active': pag == page}" ><a class="page-link" (click)="setPage(pag)">{{pag}}</a></li>
+
+      <li class="page-item">
+        <a class="page-link" (click)="nextPage()">Next</a>
+      </li>
+    </ul>
+  </nav>
+  <br>
+</div>
+
+
+
+

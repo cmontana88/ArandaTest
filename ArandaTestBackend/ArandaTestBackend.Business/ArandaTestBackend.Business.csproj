@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ArandaTestBackend.DataAccess\ArandaTestBackend.DataAccess.csproj" />
+    <ProjectReference Include="..\ArandaTestBackend.Entities\ArandaTestBackend.Entities.csproj" />
+  </ItemGroup>
+
+</Project>
